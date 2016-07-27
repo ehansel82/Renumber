@@ -23,6 +23,7 @@ namespace Renumber
             }
 
             synth.Speak("Remember these numbers.");
+            synth.Rate = 2;
             foreach (var number in numbers)
             {
                 synth.Speak(number.ToString());
