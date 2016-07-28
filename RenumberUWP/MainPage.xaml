@@ -7,8 +7,14 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="textBlock" Margin="843,148,954,0" TextWrapping="Wrap" Text="Hello World" VerticalAlignment="Top" Height="58" FontSize="21.333"/>
-
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF070074" Offset="0"/>
+                <GradientStop Color="#FF68D6F7" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <TextBlock x:Name="textBlock" Margin="50,50,0,0" TextWrapping="Wrap" Text="Renumber" HorizontalAlignment="Left" Width="977" Height="267" VerticalAlignment="Top" FontSize="106.667" FontFamily="Consolas"/>
+        <Button x:Name="startButton" Margin="0,0,50,50" Content="START" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Height="98" Width="178" FontFamily="Consolas" FontSize="53.333" Background="#330BAB52" Foreground="#FF024C20" BorderBrush="#FF02693B"/>
     </Grid>
 </Page>

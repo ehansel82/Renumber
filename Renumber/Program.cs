@@ -38,6 +38,7 @@ namespace Renumber
                     Environment.Exit(0);
                 }
             }
+            synth.Rate = 1;
             synth.Speak("YOU WIN! YAY!");
             Console.ReadLine();
         }
