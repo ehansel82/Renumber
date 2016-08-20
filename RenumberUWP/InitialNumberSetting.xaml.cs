@@ -21,17 +21,22 @@ namespace RenumberUWP
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class SettingsPage : Page
+    public sealed partial class InitialNumberSetting : Page
     {
-        public SettingsPage()
+        public InitialNumberSetting()
         {
             this.InitializeComponent();
         }
 
-        private async void settings_Loaded(object sender, RoutedEventArgs e)
+        private void goButton_Click(object sender, RoutedEventArgs e)
+        {
+ 
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var speaker = new Speaker();
-            await speaker.Speak(this.numberText.Text);
+            await speaker.Speak(textHowManyNumbers.Text);
         }
     }
 }
