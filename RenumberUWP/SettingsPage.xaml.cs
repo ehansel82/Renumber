@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Renumber.Logic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,23 +14,24 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace RenumberUWP
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class SettingsPage : Page
     {
-        public MainPage()
+        public SettingsPage()
         {
             this.InitializeComponent();
         }
 
-        private void startButton_Click(object sender, RoutedEventArgs e)
+        private async void settings_Loaded(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(SettingsPage));
+            var speaker = new Speaker();
+            await speaker.Speak(this.numberText.Text);
         }
     }
 }
