@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Media.SpeechRecognition;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,6 +37,26 @@ namespace RenumberUWP
         {
             var speaker = new Speaker();
             await speaker.Speak(textHowManyNumbers.Text);
+
+            var speechRecognizer = new Windows.Media.SpeechRecognition.SpeechRecognizer();
+
+            var constraints = new SpeechRecognitionListConstraint(new List<string>() { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" });
+
+            speechRecognizer.Constraints.Add(constraints);
+
+            // Compile the dictation grammar by default.
+            await speechRecognizer.CompileConstraintsAsync();
+
+            // Start recognition.
+            while (true)
+            {
+                SpeechRecognitionResult speechRecognitionResult = await speechRecognizer.RecognizeAsync();
+                if (!string.IsNullOrWhiteSpace(speechRecognitionResult.Text))
+                {
+                    textNumbers.Text = speechRecognitionResult.Text;
+                    break;
+                }
+            }
         }
     }
 }
