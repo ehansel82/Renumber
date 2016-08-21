@@ -23,9 +23,8 @@ namespace RenumberUWP
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class GamePage : Page
+    public sealed partial class GamePage : SpeakingPage
     {
-        private TaskCompletionSource<bool> _tcs;
         private Game _game;
         public GamePage()
         {
@@ -33,33 +32,14 @@ namespace RenumberUWP
             _game = App.Current.Resources["Game"] as Game;
         }
 
-        public async Task Speak(string text)
-        {
-            _tcs = new TaskCompletionSource<bool>();
-            using (var synth = new SpeechSynthesizer())
-            {
-                var stream = await synth.SynthesizeTextToStreamAsync(text);
-                media.MediaEnded -= Media_MediaEnded;
-                media.MediaEnded += Media_MediaEnded;
-                media.SetSource(stream, stream.ContentType);
-                media.Play();
-            }
-            await _tcs.Task;
-        }
-
-        private void Media_MediaEnded(object sender, RoutedEventArgs e)
-        {
-            _tcs.TrySetResult(true); 
-        }
-
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            await Speak("OK, let's play.");
-            await Speak("Remember these numbers.");
+            await base.Speak("OK, let's play.", media);
+            await base.Speak("Remember these numbers.", media);
 
             foreach(var number in _game.Numbers)
             {
-                await Speak(number.ToString());
+                await base.Speak(number.ToString(), media);
             }
             
         }

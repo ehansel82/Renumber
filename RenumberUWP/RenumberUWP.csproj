@@ -107,6 +107,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Logic\SpeechManager.cs" />
+    <Compile Include="SpeakingPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
