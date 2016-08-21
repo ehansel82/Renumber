@@ -10,6 +10,7 @@ namespace Renumber.Logic
 
         public Game(int numberCount)
         {
+            _random = new Random();
             _initializeNumbers(numberCount);
         }
 

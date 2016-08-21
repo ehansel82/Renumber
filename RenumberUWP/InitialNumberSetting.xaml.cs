@@ -30,9 +30,8 @@ namespace RenumberUWP
 
         private void goButton_Click(object sender, RoutedEventArgs e)
         {
- 
+            App.Current.Resources["Game"] = new Game(Convert.ToInt32(textNumbers.Text));       
         }
-
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var speaker = new Speaker();

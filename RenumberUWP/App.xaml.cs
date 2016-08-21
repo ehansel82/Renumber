@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Renumber.Logic;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -12,6 +13,7 @@ namespace RenumberUWP
     /// </summary>
     sealed partial class App : Application
     {
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
