@@ -34,8 +34,10 @@ namespace RenumberUWP
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            textListenerState.Text = string.Empty;
             textNumbers.Text = string.Empty;
             var speechManager = App.Current.Resources["SpeechManager"] as SpeechManager;
+            speechManager.ListenerStateChanged += SpeechManager_ListenerStateChanged;
             await base.Speak("OK, let's play.", media);
             await base.Speak("Remember these numbers.", media);
 
@@ -67,6 +69,14 @@ namespace RenumberUWP
                     }
                 }
             } 
+        }
+        private async void SpeechManager_ListenerStateChanged(Windows.Media.SpeechRecognition.SpeechRecognizer sender, Windows.Media.SpeechRecognition.SpeechRecognizerStateChangedEventArgs args)
+        {
+            await textListenerState.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+            {
+                var speechManager = App.Current.Resources["SpeechManager"] as SpeechManager;
+                textListenerState.Text = speechManager.ListenerState.ToString();
+            });
         }
     }
 }

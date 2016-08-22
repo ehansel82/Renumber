@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Media.SpeechRecognition;
 using Windows.Media.SpeechSynthesis;
 using Windows.UI.Xaml.Controls;
@@ -24,7 +25,7 @@ namespace Renumber.Logic
 
             _speechRecognizer.Timeouts.InitialSilenceTimeout = TimeSpan.FromSeconds(5.0);
             _speechRecognizer.Timeouts.BabbleTimeout = TimeSpan.FromSeconds(4.0);
-            _speechRecognizer.Timeouts.EndSilenceTimeout = TimeSpan.FromSeconds(.3);
+            _speechRecognizer.Timeouts.EndSilenceTimeout = TimeSpan.FromSeconds(.5);
         }
 
         public async Task Initialize()
@@ -35,6 +36,20 @@ namespace Renumber.Logic
             await _speechRecognizer.CompileConstraintsAsync();
         }
 
+        public SpeechRecognizerState ListenerState
+        {
+            get
+            {
+                return _speechRecognizer.State;
+            }
+        }
+
+        public event TypedEventHandler<SpeechRecognizer, SpeechRecognizerStateChangedEventArgs> ListenerStateChanged
+        {
+            add { _speechRecognizer.StateChanged += value; }
+            remove { _speechRecognizer.StateChanged -= value; }
+        }
+           
         public async Task<string> ListenForNumber()
         {
             var speechRecognitionResult = await _speechRecognizer.RecognizeAsync();

@@ -23,9 +23,11 @@ namespace RenumberUWP
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
         public MainPage()
         {
             this.InitializeComponent();
+            startButton.IsEnabled = false;
         }
 
         private void startButton_Click(object sender, RoutedEventArgs e)
@@ -38,6 +40,7 @@ namespace RenumberUWP
             var speechManager = new SpeechManager();
             await speechManager.Initialize();
             App.Current.Resources["SpeechManager"] = speechManager;
+            startButton.IsEnabled = true;
         }
 
         private void gameDifficulty_SelectionChanged(object sender, SelectionChangedEventArgs e)
