@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenumberConsole", "Renumber\RenumberConsole.csproj", "{D9469632-FDDB-48A7-976B-B7AD96E4367B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RenumberUWP", "RenumberUWP\RenumberUWP.csproj", "{E8374120-EE47-4273-9178-672ED20C3C05}"
 EndProject
 Global
@@ -19,22 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Debug|ARM.Build.0 = Debug|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Debug|x64.Build.0 = Debug|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Debug|x86.Build.0 = Debug|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Release|ARM.ActiveCfg = Release|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Release|ARM.Build.0 = Release|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Release|x64.ActiveCfg = Release|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Release|x64.Build.0 = Release|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Release|x86.ActiveCfg = Release|Any CPU
-		{D9469632-FDDB-48A7-976B-B7AD96E4367B}.Release|x86.Build.0 = Release|Any CPU
 		{E8374120-EE47-4273-9178-672ED20C3C05}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{E8374120-EE47-4273-9178-672ED20C3C05}.Debug|ARM.ActiveCfg = Debug|ARM
 		{E8374120-EE47-4273-9178-672ED20C3C05}.Debug|ARM.Build.0 = Debug|ARM

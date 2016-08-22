@@ -35,6 +35,7 @@ namespace RenumberUWP
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             textNumbers.Text = string.Empty;
+            var speechManager = App.Current.Resources["SpeechManager"] as SpeechManager;
             await base.Speak("OK, let's play.", media);
             await base.Speak("Remember these numbers.", media);
 
@@ -47,17 +48,16 @@ namespace RenumberUWP
             
             while(_game.Status == GameStatus.INITIAL || _game.Status == GameStatus.IN_PROGRESS)
             {
-                var Speaker = new SpeechManager();
                 while (true)
                 {
-                    var answer = await Speaker.ListenForNumberAnswers();
+                    var answer = await speechManager.ListenForNumber();
                     if (!string.IsNullOrWhiteSpace(answer))
                     {
                         textNumbers.Text += answer + ",";
                         _game.Guess(Convert.ToInt32(answer));
                         if(_game.Status == GameStatus.WON)
                         {
-                            await base.Speak("YOU WON THE GAME CONGRATULATIONS!", media);
+                            await base.Speak("YOU WON THE GAME! CONGRATULATIONS!", media);
                             break;
                         }
                         else if (_game.Status == GameStatus.LOST){

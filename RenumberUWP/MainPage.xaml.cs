@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Renumber.Logic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,21 @@ namespace RenumberUWP
         private void startButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(InitialNumberSetting));
+        }
+
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            var speechManager = new SpeechManager();
+            await speechManager.Initialize();
+            App.Current.Resources["SpeechManager"] = speechManager;
+        }
+
+        private void gameDifficulty_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (gameDifficulty.SelectedIndex == 0)
+                App.Current.Resources["Game"] = new Game(true);
+            else
+                App.Current.Resources["Game"] = new Game(false);
         }
     }
 }

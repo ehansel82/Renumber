@@ -13,16 +13,31 @@ namespace Renumber.Logic
         private int _currentNumber;
         private List<int> _playerNumbers;
         private Random _random;
+        private int _numberCount;
 
         public List<int> Numbers { get; set; }
+        public bool EasyNumbers { get; set; }
 
-        public Game(int numberCount)
+        public int NumberCount
+        {
+            get
+            {
+                return _numberCount;
+            }
+            set
+            {
+                _numberCount = value;
+                _initializeNumbers(_numberCount);
+            }
+        }
+
+        public Game(bool easyNumbers)
         {
             this.Status = GameStatus.INITIAL;
             _currentNumber = 0;
             _random = new Random();
             _playerNumbers = new List<int>();
-            _initializeNumbers(numberCount);
+            EasyNumbers = easyNumbers;
         }
 
         public GameStatus Status { get; set; }
@@ -50,7 +65,7 @@ namespace Renumber.Logic
             Numbers = new List<int>();
             for (int i = 0; i < numberCount; i++)
             {
-                Numbers.Add(_random.Next(99));
+                Numbers.Add(_random.Next(EasyNumbers ? 9 : 99));
             }
         }
     }
