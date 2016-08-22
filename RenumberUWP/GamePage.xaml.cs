@@ -48,14 +48,18 @@ namespace RenumberUWP
 
             await base.Speak("Tell me my numbers.", media);
             
-            while(_game.Status == GameStatus.INITIAL || _game.Status == GameStatus.IN_PROGRESS)
+            while(_game.Status == GameStatus.IN_PROGRESS)
             {
                 while (true)
                 {
                     var answer = await speechManager.ListenForNumber();
                     if (!string.IsNullOrWhiteSpace(answer))
                     {
-                        textNumbers.Text += answer + ",";
+                        if (string.IsNullOrWhiteSpace(textNumbers.Text))
+                            textNumbers.Text += answer;
+                        else
+                            textNumbers.Text += $", {answer}";
+                        
                         _game.Guess(Convert.ToInt32(answer));
                         if(_game.Status == GameStatus.WON)
                         {

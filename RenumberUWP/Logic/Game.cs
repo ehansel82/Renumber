@@ -5,7 +5,7 @@ namespace Renumber.Logic
 {
     public enum GameStatus
     {
-        INITIAL, IN_PROGRESS, WON, LOST
+        IN_PROGRESS, WON, LOST
     }
 
     public class Game
@@ -33,7 +33,7 @@ namespace Renumber.Logic
 
         public Game(bool easyNumbers)
         {
-            this.Status = GameStatus.INITIAL;
+            this.Status = GameStatus.IN_PROGRESS;
             _currentNumber = 0;
             _random = new Random();
             _playerNumbers = new List<int>();
