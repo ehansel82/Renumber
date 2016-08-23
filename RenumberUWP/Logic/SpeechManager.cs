@@ -17,9 +17,9 @@ namespace Renumber.Logic
         public SpeechManager()
         {
             _constraintsList = new List<string>();
-            for (int i = 0; i < 99; i++)
+            for (int i = 0; i < 100; i++)
             {
-                _constraintsList.Add((i + 1).ToString());
+                _constraintsList.Add((i).ToString());
             }
             _speechRecognizer = new SpeechRecognizer();
 

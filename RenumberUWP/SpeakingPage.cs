@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace RenumberUWP
             _tcs = new TaskCompletionSource<bool>();
             using (var synth = new SpeechSynthesizer())
             {
+                synth.Voice = SpeechSynthesizer.AllVoices.Where(x => x.Gender == VoiceGender.Female).FirstOrDefault();
                 var stream = await synth.SynthesizeTextToStreamAsync(text);
                 media.MediaEnded -= Media_MediaEnded;
                 media.MediaEnded += Media_MediaEnded;

@@ -34,6 +34,7 @@ namespace RenumberUWP
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            playAgainButton.Visibility = Visibility.Collapsed;
             textListenerState.Text = string.Empty;
             textNumbers.Text = string.Empty;
             var speechManager = App.Current.Resources["SpeechManager"] as SpeechManager;
@@ -72,7 +73,8 @@ namespace RenumberUWP
                         }
                     }
                 }
-            } 
+            }
+            playAgainButton.Visibility = Visibility.Visible;
         }
         private async void SpeechManager_ListenerStateChanged(Windows.Media.SpeechRecognition.SpeechRecognizer sender, Windows.Media.SpeechRecognition.SpeechRecognizerStateChangedEventArgs args)
         {
@@ -81,6 +83,11 @@ namespace RenumberUWP
                 var speechManager = App.Current.Resources["SpeechManager"] as SpeechManager;
                 textListenerState.Text = speechManager.ListenerState.ToString();
             });
+        }
+
+        private void playAgainButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
         }
     }
 }
