@@ -1,4 +1,5 @@
 ﻿using Renumber.Logic;
+using RenumberUWP;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,49 +26,47 @@ namespace RenumberUWP
     /// </summary>
     public sealed partial class GamePage : SpeakingPage
     {
-        private Game _game;
+        public GamePageViewModel vm {get; set;}
+        private Game _currentGame = App.Current.Resources["Game"] as Game;
         public GamePage()
         {
             this.InitializeComponent();
-            _game = App.Current.Resources["Game"] as Game;
+            vm = new GamePageViewModel();
+            vm.SetGame(_currentGame);
+            DataContext = vm;
         }
 
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             playAgainButton.Visibility = Visibility.Collapsed;
             textListenerState.Text = string.Empty;
-            textNumbers.Text = string.Empty;
+
             var speechManager = App.Current.Resources["SpeechManager"] as SpeechManager;
             speechManager.ListenerStateChanged += SpeechManager_ListenerStateChanged;
             await base.Speak("OK, let's play.", media);
             await base.Speak("Remember these numbers.", media);
 
-            foreach(var number in _game.Numbers)
+            foreach(var number in _currentGame.Numbers)
             {
                 await base.Speak(number.ToString(), media);
             }
 
             await base.Speak("Tell me my numbers.", media);
             
-            while(_game.Status == GameStatus.IN_PROGRESS)
+            while(_currentGame.Status == GameStatus.IN_PROGRESS)
             {
                 while (true)
                 {
                     var answer = await speechManager.ListenForNumber();
                     if (!string.IsNullOrWhiteSpace(answer))
                     {
-                        if (string.IsNullOrWhiteSpace(textNumbers.Text))
-                            textNumbers.Text += answer;
-                        else
-                            textNumbers.Text += $", {answer}";
-                        
-                        _game.Guess(Convert.ToInt32(answer));
-                        if(_game.Status == GameStatus.WON)
+                        _currentGame.Guess(Convert.ToInt32(answer));
+                        if(_currentGame.Status == GameStatus.WON)
                         {
                             await base.Speak("YOU WON THE GAME! CONGRATULATIONS!", media);
                             break;
                         }
-                        else if (_game.Status == GameStatus.LOST){
+                        else if (_currentGame.Status == GameStatus.LOST){
                             await base.Speak("That was wrong. You lost the game. Goodbye.", media);
                             break;
                         }

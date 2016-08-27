@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Renumber.Logic
 {
@@ -17,6 +18,18 @@ namespace Renumber.Logic
 
         public List<int> Numbers { get; set; }
         public bool EasyNumbers { get; set; }
+
+        public delegate void GuessHandler(Game game, EventArgs args);
+
+        public event GuessHandler onGuess;
+
+        public List<int> PlayerNumbers
+        {
+            get
+            {
+                return _playerNumbers;
+            }
+        }
 
         public int NumberCount
         {
@@ -57,6 +70,9 @@ namespace Renumber.Logic
             {
                 _currentNumber += 1;
             }
+            if (onGuess != null)
+                onGuess(this, EventArgs.Empty);
+
             return Status;
         }
 
@@ -65,7 +81,7 @@ namespace Renumber.Logic
             Numbers = new List<int>();
             for (int i = 0; i < numberCount; i++)
             {
-                Numbers.Add(_random.Next(EasyNumbers ? 9 : 99));
+                Numbers.Add(_random.Next(1,EasyNumbers ? 9 : 99));
             }
         }
     }
